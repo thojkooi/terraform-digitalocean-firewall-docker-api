@@ -3,9 +3,6 @@ resource "digitalocean_firewall" "inbound-docker-remote-api-access" {
   droplet_ids = ["${var.droplet_ids}"]
   tags        = ["${var.tags}"]
 
-  # We only need to create this rule if it will be applied to any droplet / tags
-  count = "${length(var.tags) == 0 && length(var.droplet_ids) == 0 ? 0 : 1}"
-
   inbound_rule = [
     {
       protocol                  = "tcp"
@@ -24,9 +21,6 @@ resource "digitalocean_firewall" "outbound-docker-remote-api-access" {
   name        = "${var.prefix}-inbound-docker-remote-api-access-fw"
   droplet_ids = ["${var.api_access_droplet_ids}"]
   tags        = ["${var.api_access_tags}"]
-
-  # We only need to create this rule if it will be applied to any droplet / tags
-  count = "${length(var.api_access_tags) == 0 && length(var.api_access_droplet_ids) == 0 ? 0 : 1}"
 
   outbound_rule = [
     {
