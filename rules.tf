@@ -18,7 +18,7 @@ resource "digitalocean_firewall" "inbound-docker-remote-api-access" {
 # Create the outbound rule to allow droplets that have inbound access
 #  to sent outboud traffic to the droplets exposing the API.
 resource "digitalocean_firewall" "outbound-docker-remote-api-access" {
-  name        = "${var.prefix}-inbound-docker-remote-api-access-fw"
+  name        = "${var.prefix}-outbound-docker-remote-api-access-fw"
   droplet_ids = ["${var.api_access_droplet_ids}"]
   tags        = ["${var.api_access_tags}"]
 
